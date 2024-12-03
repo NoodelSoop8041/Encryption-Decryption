@@ -33,10 +33,10 @@ def affine_decrypt(text, multiple, shift):
             if char.isalpha():
                 char_code = ord(char)
                 if char.islower():
-                    cipher_char = (mod_inverse*(char_code - ((ord("a")-1) + shift)))
+                    cipher_char = (mod_inverse(multiple)*(char_code - ((ord("a")-1) + shift)))
                     message += chr(cipher_char%26 + (ord("a")-1))
                 else:
-                    cipher_char = (mod_inverse*(char_code - ((ord("A")-1) + shift)))
+                    cipher_char = (mod_inverse(multiple)*(char_code - ((ord("A")-1) + shift)))
                     message += chr(cipher_char%26 + (ord("A")-1))
             else:
                 message += char
