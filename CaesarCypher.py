@@ -18,7 +18,7 @@ def caesar_cypher(text, shift):
 
 text = input("Enter your message: ")
 while True:
-    shift = input("Enter your value. (Positive for encryption, Negative for decryption): ")
+    shift = input("Enter your value: ")
     try:
         int(shift)
     except ValueError:
@@ -28,4 +28,9 @@ while True:
         break
 shift = int(shift)
 
-print("Message:", caesar_cypher(text, shift))
+e_d = input("Would you like to Encrypt or Decrypt a message?")
+
+if e_d == "encrypt":
+    print("Message:", caesar_cypher(text, shift))
+elif e_d == "decrypt":
+    print("Message:", caesar_cypher(text, -shift))

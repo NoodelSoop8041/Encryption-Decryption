@@ -1,3 +1,11 @@
+def invm(multiple):
+    """Finds the inverse of the encryption multiple under mod 26"""
+
+    for x in range(1, 26):
+        if (multiple*x) % 26 == 1:
+            return x
+    return None
+
 def affine_encrypt(text, multiple, shift):
     """Encrypts a text using the Affine Cypher"""
 
@@ -14,6 +22,23 @@ def affine_encrypt(text, multiple, shift):
             message.append(char)
     
     return message
+
+def affine_decrypt(text, multiple, shift):
+    """Decrypts a text using the Affine Cypher"""
+
+    message2 = []
+
+    for char in text:
+            if char.isalpha():
+                char_code = ord(char)
+                if char.islower():
+                    message2.append(((invm(multiple)*((char_code - (ord("a")-1))) + shift))%26)
+                else:
+                    message2.append(((invm(multiple)*((char_code - (ord("A")-1))) + shift))%26)
+            else:
+                message2.append(char)
+        
+    return message2
 
 text = input("Enter your message: ")
 
@@ -41,3 +66,4 @@ multiple = int(multiple)
 shift = int(shift)
 
 print("Message:", affine_encrypt(text, multiple, shift))
+print(affine_decrypt(text, multiple, shift))
