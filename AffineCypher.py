@@ -7,10 +7,6 @@ def mod_inverse(multiple):
     return None
 
 
-
-
-
-
 def affine_encrypt(text, multiple, shift):
     """Encrypts a text using the Affine Cypher"""
 
@@ -37,9 +33,11 @@ def affine_decrypt(text, multiple, shift):
             if char.isalpha():
                 char_code = ord(char)
                 if char.islower():
-                    message += chr(((((char_code - (ord("a")-1)) - shift) * mod_inverse(multiple))%26) + (ord("a")-1))
+                    cipher_char = (mod_inverse*(char_code - ((ord("a")-1) + shift)))
+                    message += chr(cipher_char%26 + (ord("a")-1))
                 else:
-                    message += chr(((((char_code - (ord("A")-1)) - shift) * mod_inverse(multiple))%26) + (ord("A")-1))
+                    cipher_char = (mod_inverse*(char_code - ((ord("A")-1) + shift)))
+                    message += chr(cipher_char%26 + (ord("A")-1))
             else:
                 message += char
         
@@ -64,7 +62,7 @@ while True:
 while True:
     shift = input("Enter your shift: ")
     try:
-        int(multiple)
+        int(shift)
     except ValueError:
         print("Please enter a number shift")
         continue
