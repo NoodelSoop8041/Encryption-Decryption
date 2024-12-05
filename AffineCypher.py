@@ -16,9 +16,11 @@ def affine_encrypt(text, multiple, shift):
         if char.isalpha():
             char_code = ord(char)
             if char.islower():
-                message += chr(((((char_code - (ord("a")-1)) * multiple) + shift) % 26) + (ord("a")-1))
+                cipher_char = ((char_code - (96)) * multiple)
+                message += chr((cipher_char+shift)%26 + 96)
             else:
-                message += chr(((((char_code - (ord("A")-1)) * multiple)+ shift) % 26) + (ord("A")-1))
+                cipher_char = ((char_code - (64)) * multiple)
+                message += chr((cipher_char+shift)%26 + 64)
         else:
             message += char
     
@@ -33,11 +35,11 @@ def affine_decrypt(text, multiple, shift):
             if char.isalpha():
                 char_code = ord(char)
                 if char.islower():
-                    cipher_char = (mod_inverse(multiple)*(char_code - ((ord("a")-1) + shift)))
-                    message += chr(cipher_char%26 + (ord("a")-1))
+                    cipher_char = (mod_inverse(multiple)*(char_code - (96 + shift)))
+                    message += chr(cipher_char%26 + 96)
                 else:
-                    cipher_char = (mod_inverse(multiple)*(char_code - ((ord("A")-1) + shift)))
-                    message += chr(cipher_char%26 + (ord("A")-1))
+                    cipher_char = (mod_inverse(multiple)*(char_code - (64 + shift)))
+                    message += chr(cipher_char%26 + 64)
             else:
                 message += char
         
@@ -45,7 +47,7 @@ def affine_decrypt(text, multiple, shift):
 
 
 
-
+mult = [1,3,5,7,9,11,15,17,19,21,23,25]
 
 text = input("Enter your message: ")
 

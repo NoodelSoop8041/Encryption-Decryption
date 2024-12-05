@@ -36,10 +36,10 @@ def affine_encrypt(text, multiple, shift):
             char_code = ord(char)
             if char.islower():
                 cipher_char = ((char_code - (96)) * multiple)
-                message += chr(cipher_char%26 + (96 + shift))
+                message += chr((cipher_char+shift)%26 + 96)
             else:
                 cipher_char = ((char_code - (64)) * multiple)
-                message += chr(cipher_char%26 + (64 + shift))
+                message += chr((cipher_char+shift)%26 + 64)
         else:
             message += char
     
