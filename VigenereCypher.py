@@ -25,3 +25,9 @@ def vigenere_encrypt(text):
 text = input("Please enter your message:" )
 
 print(vigenere_encrypt(text))
+
+e_d = input("Would you like to encrypt or decrypt?" )
+if e_d.lower() == "encrypt":
+    print(vigenere_encrypt(text))
+if e_d.lower() == "decrypt":
+    print(vigenere_decrypt(text))
